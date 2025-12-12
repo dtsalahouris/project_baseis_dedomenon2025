@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS travel_agency;
+CREATE DATABASE travel_agency_2025;
+USE travel_agency;
+
 SET FOREIGN_KEY_CHECKS = 0;
 
 CREATE TABLE language_ref(
