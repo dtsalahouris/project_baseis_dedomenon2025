@@ -1,7 +1,6 @@
 USE travel_agency_2025;
 SET FOREIGN_KEY_CHECKS = 0;
 
--- test file for insert.sql
 INSERT INTO language_ref(lang_code, lang_name) VALUES
 ('EN', 'English'),
 ('GR', 'Greek'),

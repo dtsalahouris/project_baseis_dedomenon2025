@@ -27,8 +27,4 @@ BEGIN
         END IF;
     END IF;
 END$
-<<<<<<< HEAD
 DELIMITER ;
-=======
-DELIMITER ;
->>>>>>> e85aed1340fa874dafd33a70446b0b519aa401aa
