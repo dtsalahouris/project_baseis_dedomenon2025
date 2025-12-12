@@ -1,4 +1,4 @@
-USE travel_agency;
+USE travel_agency_2025;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- test file for insert.sql
