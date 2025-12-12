@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS travel_agency;
+DROP DATABASE IF EXISTS travel_agency_2025;
 CREATE DATABASE travel_agency_2025;
-USE travel_agency;
+USE travel_agency_2025;
 
 SET FOREIGN_KEY_CHECKS = 0;
 
