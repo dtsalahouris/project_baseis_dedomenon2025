@@ -52,12 +52,12 @@ BEGIN
             ta.ta_CHECKIN AS 'CHECK IN',
             ta.ta_CHECKOUT AS 'CHECK OUT',
             ta.ta_NIGHTS AS 'NIGHTS',
-            ta.ta_COST AS 'COST',
+            ta.ta_COST AS 'COST'
         FROM tripAccommodation ta 
         JOIN accommodation a ON ta.ta_ACC_ID = a.acc_ID
         WHERE ta.ta_TR_ID = p_TR_ID;
 
-        SELECT SUM(ta_COST) AS 'TOTAL TRIP COST',
+        SELECT SUM(ta_COST) AS 'TOTAL TRIP COST'
         FROM tripAccommodation
         WHERE ta_TR_ID = p_TR_ID;
     END IF;
