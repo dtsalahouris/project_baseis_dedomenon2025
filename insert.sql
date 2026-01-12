@@ -7,7 +7,10 @@ INSERT INTO language_ref(lang_code, lang_name) VALUES
 ('FR', 'French'),
 ('DE', 'German'),
 ('JP', 'Japanese'),
-('CN', 'Chinese');
+('CN', 'Chinese'),
+('IT', 'Italian'),
+('ES', 'Spanish'),
+('RU', 'Russian');
 
 INSERT INTO branch (br_code, br_street, br_num, br_city, br_manager_AT) VALUES
 (1, 'Ermou', 15, 'Athens', 'AT00000001'),
@@ -15,7 +18,10 @@ INSERT INTO branch (br_code, br_street, br_num, br_city, br_manager_AT) VALUES
 (3, 'Maizonos', 120, 'Patras', 'AT00000003'),
 (4, 'Panepistimiou', 12, 'Athens', 'AT00000004'),
 (5, 'Aristotelous', 58, 'Thessaloniki', 'AT00000005'),
-(6, 'Karaiskaki', 24, 'Patras', 'AT00000006');
+(6, 'Karaiskaki', 24, 'Patras', 'AT00000006'),
+(7, 'Stadiou', 12, 'Athens', 'AT00000027'),
+(8, 'Egnatia', 80, 'Thessaloniki', 'AT00000028'),
+(9, 'Agiou Andreou', 35, 'Patras', 'AT00000029');
 
 INSERT INTO worker(wrk_AT, wrk_name, wrk_lname, wrk_email, wrk_salary, wrk_br_code) VALUES
 ('AT00000001', 'Giorgos', 'Papadopoulos', 'g.pap@agency.gr', 1500.00, 1),
@@ -43,9 +49,22 @@ INSERT INTO worker(wrk_AT, wrk_name, wrk_lname, wrk_email, wrk_salary, wrk_br_co
 ('AT00000023', 'Konstantina', 'Diamantidi', 'kon.diam@agency.gr', 1050.00, 3),
 ('AT00000024', 'Marilida', 'Dimitriou', 'mar.dim@agency.gr', 980.00, 5),
 ('AT00000025', 'Markella', 'Loudari', 'mark.loud.perik@agency.gr', 1100.00, 1),
-('AT00000026', 'Dimitra', 'Theotokatou', 'd.theot@agency.gr', 840.00, 2);
+('AT00000026', 'Dimitra', 'Theotokatou', 'd.theot@agency.gr', 840.00, 2),
+('AT00000027', 'Giorgos', 'Katsaros', 'g.katsaros@agency.gr', 1520.00, 1),
+('AT00000028', 'Eleni', 'Karagianni', 'e.karagianni@agency.gr', 1480.00, 2),
+('AT00000029', 'Nikos', 'Samaras', 'n.samaras@agency.gr', 1410.00, 3),
+('AT00000030', 'Maria', 'Kotsou', 'm.kotsou@agency.gr', 1390.00, 4),
+('AT00000031', 'Dimitris', 'Papageorgiou', 'd.papageorgiou@agency.gr', 1600.00, 5),
+('AT00000032', 'Katerina', 'Stavropoulou', 'k.stavropoulou@agency.gr', 920.00, 6),
+('AT00000033', 'Panagiotis', 'Theodorou', 'p.theodorou@agency.gr', 880.00, 2),
+('AT00000034', 'Ioanna', 'Mavridou', 'i.mavridou@agency.gr', 950.00, 1),
+('AT00000035', 'Christos', 'Anagnostou', 'c.anagnostou@agency.gr', 910.00, 3),
+('AT00000036', 'Sofia', 'Lazaridou', 's.lazaridou@agency.gr', 990.00, 4),
+('AT00000037', 'Vasilis', 'Antonakis', 'v.antonakis@agency.gr', 1020.00, 5),
+('AT00000038', 'Niki', 'Papantoniou', 'n.papantoniou@agency.gr', 980.00, 6),
+('AT00000039', 'Alexandros', 'Kyriazis', 'a.kyriazis@agency.gr', 1100.00, 1);
 
-INSERT INTO admin (adm_AT, adm_type, adm_diploma) VALUES
+INSERT INTO admin(adm_AT, adm_type, adm_diploma) VALUES
 ('AT00000001', 'ADMINISTRATIVE', 'MBA in Management'),
 ('AT00000002', 'LOGISTICS', 'MSc Logistics'),
 ('AT00000003', 'ACCOUNTING', 'BSc Economics'),
@@ -55,7 +74,13 @@ INSERT INTO admin (adm_AT, adm_type, adm_diploma) VALUES
 ('AT00000007', 'ADMINISTRATIVE', 'Diploma in Office Administration'),
 ('AT00000008', 'LOGISTICS', 'BSc Transport & Shipping'),
 ('AT00000009', 'ACCOUNTING', 'Certified Public Accountant'),
-('AT00000010', 'LOGISTICS', 'MBA in Supply Chain Management');
+('AT00000010', 'LOGISTICS', 'MBA in Supply Chain Management'),
+('AT00000027', 'ADMINISTRATIVE', 'Πτυχίο Διοίκησης Επιχειρήσεων'),
+('AT00000028', 'LOGISTICS', 'Μεταπτυχιακό στη Διοίκηση Logistics'),
+('AT00000029', 'ACCOUNTING', 'Πτυχίο Λογιστικής & Χρηματοοικονομικών'),
+('AT00000030', 'ADMINISTRATIVE', 'Δίπλωμα Γραμματειακής Υποστήριξης'),
+('AT00000031', 'LOGISTICS', 'Πιστοποίηση Supply Chain Management');
+
 
 INSERT INTO manages(mng_adm_AT, mng_br_code) VALUES
 ('AT00000001', 1),
@@ -63,7 +88,10 @@ INSERT INTO manages(mng_adm_AT, mng_br_code) VALUES
 ('AT00000003', 3),
 ('AT00000004', 4),
 ('AT00000005', 5),
-('AT00000006', 6);
+('AT00000006', 6),
+('AT00000027', 7),
+('AT00000028', 8),
+('AT00000029', 9);
 
 INSERT INTO driver(drv_AT, drv_license, drv_route, drv_experience) VALUES
 ('AT00000011', 'D', 'LOCAL', 3),
@@ -73,7 +101,11 @@ INSERT INTO driver(drv_AT, drv_license, drv_route, drv_experience) VALUES
 ('AT00000015', 'A', 'LOCAL', 5),
 ('AT00000016', 'C', 'ABROAD', 12),
 ('AT00000017', 'B', 'ABROAD', 9),
-('AT00000018', 'D', 'LOCAL', 11);
+('AT00000018', 'D', 'LOCAL', 11),
+('AT00000032', 'D', 'LOCAL', 14),
+('AT00000033', 'C', 'ABROAD', 24),
+('AT00000034', 'B', 'LOCAL', 10),
+('AT00000035', 'C', 'ABROAD', 18);
 
 INSERT INTO guide(gui_AT, gui_cv) VALUES
 ('AT00000019', 'History expert with 5 years experience in ancient Greek sites'),
@@ -83,7 +115,11 @@ INSERT INTO guide(gui_AT, gui_cv) VALUES
 ('AT00000023', 'Archaeology specialist with 6 years experience in excavations'),
 ('AT00000024', 'Mountain guide, certified in alpine routes and hiking'),
 ('AT00000025', 'Museum tour professional, multilingual speaker'),
-('AT00000026', 'Cultural heritage expert, specializes in Byzantine sites');
+('AT00000026', 'Cultural heritage expert, specializes in Byzantine sites'),
+('AT00000036', 'Ξεναγός με ειδίκευση σε αρχαιολογικούς χώρους και ιστορικούς περιπάτους'),
+('AT00000037', 'Πιστοποιημένος ξεναγός πόλεων – μουσεία, αρχιτεκτονική, πολιτισμός'),
+('AT00000038', 'Οικοτουρισμός & πεζοπορία – ορεινές διαδρομές και φυσιολατρικές ξεναγήσεις'),
+('AT00000039', 'Γαστρονομικές ξεναγήσεις και τοπική κουλτούρα – εμπειρία 8 ετών');
 
 INSERT INTO languages(lng_gui_AT, lng_language_code) VALUES
 ('AT00000019', 'EN'),
@@ -94,7 +130,11 @@ INSERT INTO languages(lng_gui_AT, lng_language_code) VALUES
 ('AT00000024', 'GR'),
 ('AT00000025', 'EN'),
 ('AT00000026', 'JP'),
-('AT00000026', 'DE');
+('AT00000026', 'DE'),
+('AT00000036', 'GR'),
+('AT00000037', 'EN'),
+('AT00000038', 'FR'),
+('AT00000039', 'IT');
 
 INSERT INTO phones(ph_br_code, ph_number) VALUES
 (1, '2101234567'),
@@ -106,7 +146,12 @@ INSERT INTO phones(ph_br_code, ph_number) VALUES
 (3, '2610468921'),
 (2, '2310947134'),
 (2, '2310187256'),
-(3, '2610354555');
+(3, '2610354555'),
+(7, '2103301122'),
+(7, '2103301133'),
+(8, '2310556677'),
+(9, '2610223344'),
+(9, '2610223355');
 
 INSERT INTO destination(dst_id, dst_name, dst_descr, dst_rtype, dst_language_code, dst_location) VALUES
 (1, 'Santorini', 'Beautiful volcanic island with stunning sunsets and white houses', 'LOCAL', 'GR', NULL),
@@ -118,7 +163,12 @@ INSERT INTO destination(dst_id, dst_name, dst_descr, dst_rtype, dst_language_cod
 (7, 'Berlin', 'Historic German capital with rich culture and vibrant nightlife', 'ABROAD', 'DE', NULL),
 (8, 'Barcelona', 'Vibrant Spanish city with Gaudi architecture and beaches', 'ABROAD', 'EN', NULL),
 (9, 'Mykonos', 'Famous Cycladic island with windmills and beautiful beaches', 'LOCAL', 'GR', NULL),
-(10, 'Amsterdam', 'Dutch capital with canals, Van Gogh Museum and historic center', 'ABROAD', 'EN', NULL);
+(10, 'Amsterdam', 'Dutch capital with canals, Van Gogh Museum and historic center', 'ABROAD', 'EN', NULL),
+(11, 'Fira', 'Κεντρικός οικισμός στη Σαντορίνη με θέα στην καλντέρα', 'LOCAL', 'GR', 1),
+(12, 'Nafplio', 'Ιστορική πόλη με παλιά πόλη, Παλαμήδι και Μπούρτζι', 'LOCAL', 'GR', NULL),
+(13, 'Milan', 'Ιταλική μητρόπολη της μόδας και της αρχιτεκτονικής', 'ABROAD', 'IT', NULL),
+(14, 'Madrid', 'Πρωτεύουσα της Ισπανίας με μουσεία και ζωντανή νυχτερινή ζωή', 'ABROAD', 'ES', NULL),
+(15, 'Moscow', 'Πόλη με ιστορία και αξιοθέατα όπως το Κρεμλίνο', 'ABROAD', 'RU', NULL);
 
 INSERT INTO trip(tr_id, tr_departure, tr_return, tr_maxseats, tr_cost_adult, tr_cost_child, tr_status, tr_min_participants, tr_br_code, tr_gui_AT, tr_drv_AT) VALUES
 (1, '2025-01-15 08:00:00', '2025-01-17 20:00:00', 30, 450.00, 300.00, 'CONFIRMED', 10, 1, 'AT00000019', 'AT00000011'),
@@ -134,7 +184,14 @@ INSERT INTO trip(tr_id, tr_departure, tr_return, tr_maxseats, tr_cost_adult, tr_
 (11, '2025-08-05 08:00:00', '2025-08-08 19:00:00', 28, 390.00, 250.00, 'PLANNED', 6, 5, 'AT00000021', 'AT00000014'),
 (12, '2025-08-20 07:00:00', '2025-08-25 22:00:00', 22, 890.00, 580.00, 'PLANNED', 12, 6, 'AT00000022', 'AT00000015'),
 (13, '2025-09-10 06:30:00', '2025-09-14 20:00:00', 30, 720.00, 480.00, 'PLANNED', 10, 1, 'AT00000023', 'AT00000016'),
-(14, '2025-09-25 08:00:00', '2025-09-28 21:00:00', 26, 550.00, 360.00, 'PLANNED', 8, 2, 'AT00000024', 'AT00000017');
+(14, '2025-09-25 08:00:00', '2025-09-28 21:00:00', 26, 550.00, 360.00, 'PLANNED', 8, 2, 'AT00000024', 'AT00000017'),
+(15, '2025-10-10 08:00:00', '2025-10-12 20:00:00', 30, 410.00, 260.00, 'PLANNED', 8, 7, 'AT00000036', 'AT00000032'),
+(16, '2025-10-25 07:30:00', '2025-10-29 21:30:00', 25, 920.00, 620.00, 'PLANNED', 10, 8, 'AT00000037', 'AT00000033'),
+(17, '2025-11-08 09:00:00', '2025-11-10 19:00:00', 20, 300.00, 190.00, 'PLANNED', 6, 9, 'AT00000038', 'AT00000034'),
+(18, '2025-11-20 06:45:00', '2025-11-24 22:00:00', 35, 780.00, 520.00, 'PLANNED', 12, 7, 'AT00000039', 'AT00000035'),
+(19, '2025-12-05 08:15:00', '2025-12-07 18:45:00', 28, 360.00, 240.00, 'PLANNED', 7, 8, 'AT00000036', 'AT00000032'),
+(20, '2025-12-18 07:00:00', '2025-12-22 21:00:00', 26, 860.00, 590.00, 'PLANNED', 10, 9, 'AT00000037', 'AT00000033'),
+(21, '2026-01-08 09:30:00', '2026-01-11 20:30:00', 22, 520.00, 340.00, 'PLANNED', 8, 7, 'AT00000038', 'AT00000034');
 
 INSERT INTO travel_to(to_tr_id, to_dst_id, to_arrival, to_departure, to_sequence) VALUES
 (1, 1, '2025-01-15 14:00:00', '2025-01-17 10:00:00', 1),
@@ -152,7 +209,14 @@ INSERT INTO travel_to(to_tr_id, to_dst_id, to_arrival, to_departure, to_sequence
 (11, 10, '2025-08-05 16:00:00', '2025-08-07 12:00:00', 1),
 (12, 4, '2025-08-20 18:00:00', '2025-08-24 10:00:00', 1),
 (13, 1, '2025-09-10 14:00:00', '2025-09-13 10:00:00', 1),
-(14, 7, '2025-09-25 17:00:00', '2025-09-27 12:00:00', 1);
+(14, 7, '2025-09-25 17:00:00', '2025-09-27 12:00:00', 1),
+(15, 12, '2025-10-10 12:30:00', '2025-10-12 10:00:00', 1),
+(16, 13, '2025-10-25 16:30:00', '2025-10-29 09:00:00', 1),
+(17, 11, '2025-11-08 14:00:00', '2025-11-10 09:30:00', 1),
+(18, 14, '2025-11-20 17:30:00', '2025-11-24 10:00:00', 1),
+(19, 12, '2025-12-05 12:00:00', '2025-12-07 09:00:00', 1),
+(20, 15, '2025-12-18 18:30:00', '2025-12-22 10:00:00', 1),
+(21, 11, '2026-01-08 15:00:00', '2026-01-11 10:30:00', 1);
 
 INSERT INTO event(ev_tr_id, ev_start, ev_end, ev_descr) VALUES
 (1, '2025-01-15 16:00:00', '2025-01-15 18:00:00', 'Sunset viewing at Oia village'),
@@ -174,7 +238,17 @@ INSERT INTO event(ev_tr_id, ev_start, ev_end, ev_descr) VALUES
 (11, '2025-08-06 09:00:00', '2025-08-06 15:00:00', 'Van Gogh Museum and canal cruise'),
 (12, '2025-08-21 10:00:00', '2025-08-21 14:00:00', 'Roman Forum and Palatine Hill exploration'),
 (13, '2025-09-11 15:00:00', '2025-09-11 18:00:00', 'Caldera sunset cruise with dinner'),
-(14, '2025-09-26 09:00:00', '2025-09-26 13:00:00', 'Brandenburg Gate and Reichstag tour');
+(14, '2025-09-26 09:00:00', '2025-09-26 13:00:00', 'Brandenburg Gate and Reichstag tour'),
+(15, '2025-10-10 17:00:00', '2025-10-10 19:00:00', 'Περίπατος στην παλιά πόλη & ελεύθερος χρόνος'),
+(15, '2025-10-11 11:00:00', '2025-10-11 13:00:00', 'Ξενάγηση σε κάστρο & ιστορικά σημεία'),
+(16, '2025-10-26 10:00:00', '2025-10-26 12:00:00', 'Ξενάγηση σε κέντρο πόλης & αξιοθέατα'),
+(16, '2025-10-27 16:00:00', '2025-10-27 18:00:00', 'Μουσείο/πινακοθήκη – οργανωμένη επίσκεψη'),
+(17, '2025-11-08 18:00:00', '2025-11-08 20:00:00', 'Τοπική γαστρονομική εμπειρία & δοκιμές'),
+(17, '2025-11-09 10:30:00', '2025-11-09 12:30:00', 'Οδηγούμενη πεζοπορία σε φυσική διαδρομή'),
+(18, '2025-11-21 10:00:00', '2025-11-21 12:00:00', 'City tour με ιστορικά σημεία'),
+(18, '2025-11-22 17:00:00', '2025-11-22 19:00:00', 'Επίσκεψη σε μουσείο & ελεύθερος χρόνος'),
+(20, '2025-12-19 11:00:00', '2025-12-19 13:00:00', 'Ξενάγηση σε κεντρικά αξιοθέατα'),
+(21, '2026-01-09 16:30:00', '2026-01-09 18:30:00', 'Δραστηριότητα πολιτιστικού χαρακτήρα');
 
 INSERT INTO customer(cust_id, cust_name, cust_lname, cust_email, cust_phone, cust_address, cust_birth_date) VALUES
 (1, 'Alexandros', 'Papadakis', 'alex.pad@email.com', '6971234567', 'Kifisias 45, Athens', '1985-03-15'),
@@ -196,7 +270,17 @@ INSERT INTO customer(cust_id, cust_name, cust_lname, cust_email, cust_phone, cus
 (17, 'Vasilis', 'Papadimitriou', 'vas.papad@email.com', '6917778899', 'Politechniou 80, Thessaloniki', '1984-02-17'),
 (18, 'Elena', 'Christodoulou', 'el.christ@email.com', '6998889900', 'Riga Fereou 55, Patras', '1997-10-09'),
 (19, 'Christos', 'Antonopoulos', 'chr.anton@email.com', '6979990011', 'Akadimias 100, Athens', '1981-07-14'),
-(20, 'Despina', 'Vasileiou', 'desp.vasil@email.com', '6950001122', 'Tsimiski 150, Thessaloniki', '1992-03-25');
+(20, 'Despina', 'Vasileiou', 'desp.vasil@email.com', '6950001122', 'Tsimiski 150, Thessaloniki', '1992-03-25'),
+(21, 'Giorgos', 'Pappas', 'g.pappas@email.com', '6901112233', 'Stadiou 25, Athens', '1990-05-14'),
+(22, 'Eleni', 'Kontou', 'e.kontou@email.com', '6902223344', 'Patission 120, Athens', '1995-09-02'),
+(23, 'Nikos', 'Makris', 'n.makris@email.com', '6903334455', 'Egnatia 140, Thessaloniki', '1987-01-20'),
+(24, 'Maria', 'Vlachou', 'm.vlachou@email.com', '6904445566', 'Tsimiski 88, Thessaloniki', '1998-11-11'),
+(25, 'Dimitris', 'Kotronis', 'd.kotronis@email.com', '6905556677', 'Maizonos 90, Patras', '1982-07-30'),
+(26, 'Sofia', 'Karali', 's.karali@email.com', '6906667788', 'Agiou Andreou 60, Patras', '1993-03-08'),
+(27, 'Panagiotis', 'Delis', 'p.delis@email.com', '6907778899', 'Panepistimiou 35, Athens', '1989-12-22'),
+(28, 'Niki', 'Sideri', 'n.sideri@email.com', '6908889900', 'Aristotelous 12, Thessaloniki', '2000-06-05'),
+(29, 'Vasilis', 'Koutsis', 'v.koutsis@email.com', '6909990011', 'Riga Fereou 20, Patras', '1991-10-19'),
+(30, 'Christina', 'Galanou', 'c.galanou@email.com', '6910001122', 'Akadimias 55, Athens', '1996-02-16');
 
 INSERT INTO reservation(res_tr_id, res_seatnum, res_cust_id, res_status, res_total_cost) VALUES
 (1, 1, 1, 'PAID', 450.00),
@@ -222,6 +306,69 @@ INSERT INTO reservation(res_tr_id, res_seatnum, res_cust_id, res_status, res_tot
 (11, 1, 1, 'PENDING', 390.00),
 (12, 1, 2, 'PENDING', 890.00),
 (13, 1, 3, 'PENDING', 720.00),
-(14, 1, 4, 'PENDING', 550.00);
+(14, 1, 4, 'PENDING', 550.00),
+(15, 1, 21, 'PENDING', 410.00),
+(15, 2, 22, 'PENDING', 410.00),
+(15, 3, 23, 'CONFIRMED', 410.00),
+(16, 1, 24, 'PENDING', 920.00),
+(16, 2, 25, 'CONFIRMED', 920.00),
+(17, 1, 26, 'PAID', 300.00),
+(17, 2, 27, 'PAID', 300.00),
+(18, 1, 28, 'PENDING', 780.00),
+(18, 2, 29, 'PENDING', 780.00),
+(19, 1, 30, 'CONFIRMED', 360.00),
+(20, 1, 21, 'PENDING', 860.00),
+(21, 1, 22, 'PENDING', 520.00);
+
+INSERT INTO vehicle(veh_brand,veh_model,veh_plate,veh_capacity,veh_status,veh_total_km,veh_br_code) VALUES
+('Mercedes','Tourismo','XAB-1001',49,'AVAILABLE',180000,1),
+('Iveco','Daily Minibus','XAB-2002',19,'AVAILABLE',95000,2),
+('Ford','Transit Van','XAB-3003',9,'MAINTENANCE',210000,3),
+('Toyota','Corolla','XAB-4004',5,'AVAILABLE',120000,4),
+('Volkswagen','Crafter','XAB-5005',20,'AVAILABLE',160000,5),
+('Setra','S515HD','XAB-6006',53,'AVAILABLE',300000,6);
+
+INSERT INTO accommodation(acc_ID, acc_NAME, acc_TYPE, acc_STARS, acc_RATING, acc_STATUS, acc_STREET, acc_NUMBER, acc_CITY, acc_ZIP, acc_PHONE, acc_EMAIL, acc_DEST_ID, acc_ROOMS, acc_ROOM_PRICE) VALUES
+(1, 'Santorini Sunset Hotel', 'HOTEL', 5, 4.80, 'ACTIVE', 'Oia Main Road', 12, 'Oia', '84702', '2286071234', 'info@santorinisunset.gr', 1, 30, 180.00),
+(2, 'Volcano View Suites', 'RESORT', 4, 4.50, 'ACTIVE', 'Caldera View', 5, 'Fira', '84700', '2286072345', 'book@volcanoview.gr', 1, 20, 220.00),
+(3, 'Paris Le Marais Hotel', 'HOTEL', 4, 4.30, 'ACTIVE', 'Rue de Rivoli', 45, 'Paris', '75004', '0142789012', 'reservations@lemarais.fr', 2, 50, 150.00),
+(4, 'Montmartre Boutique', 'HOSTEL', 3, 4.10, 'ACTIVE', 'Rue Lepic', 78, 'Paris', '75018', '0142789013', 'stay@montmartreboutique.fr', 2, 25, 85.00),
+(5, 'Tokyo Shibuya Inn', 'HOTEL', 4, 4.40, 'ACTIVE', 'Shibuya Street', 23, 'Tokyo', '150-0002', '0335678901', 'info@tokyoshibuya.jp', 3, 80, 120.00),
+(6, 'Shinjuku Capsule Hotel', 'HOSTEL', 2, 3.80, 'ACTIVE', 'Shinjuku Dori', 100, 'Tokyo', '160-0022', '0335678902', 'book@shinjukucapsule.jp', 3, 100, 45.00),
+(7, 'Roma Colosseum View', 'HOTEL', 5, 4.70, 'ACTIVE', 'Via dei Fori Imperiali', 8, 'Rome', '00184', '0669123456', 'info@colosseumview.it', 4, 40, 200.00),
+(8, 'Trastevere Apartments', 'APARTMENT', NULL, 4.20, 'ACTIVE', 'Via della Lungaretta', 15, 'Rome', '00153', '0669123457', 'stay@trastevere.it', 4, 15, 130.00),
+(9, 'Meteora Mountain Lodge', 'RESORT', 4, 4.60, 'ACTIVE', 'Kalampaka Road', 3, 'Kalampaka', '42200', '2432022345', 'welcome@meteoralodge.gr', 5, 25, 95.00),
+(10, 'Delphi Oracle Hotel', 'HOTEL', 3, 4.00, 'ACTIVE', 'Apollo Street', 7, 'Delphi', '33054', '2265082345', 'info@delphioracle.gr', 6, 20, 75.00),
+(11, 'Berlin Mitte Hotel', 'HOTEL', 4, 4.35, 'ACTIVE', 'Friedrichstrasse', 120, 'Berlin', '10117', '03012345678', 'reservations@berlinmitte.de', 7, 60, 110.00),
+(12, 'Kreuzberg Hostel', 'HOSTEL', 2, 3.90, 'ACTIVE', 'Oranienstrasse', 45, 'Berlin', '10999', '03012345679', 'stay@kreuzberghostel.de', 7, 40, 55.00),
+(13, 'Barcelona Beach Resort', 'RESORT', 5, 4.75, 'ACTIVE', 'Passeig Maritim', 88, 'Barcelona', '08003', '934567890', 'book@barcelonabeach.es', 8, 70, 175.00),
+(14, 'Mykonos Windmill Suites', 'HOTEL', 5, 4.85, 'ACTIVE', 'Chora Main', 2, 'Mykonos Town', '84600', '2289023456', 'info@windmillsuites.gr', 9, 18, 250.00),
+(15, 'Amsterdam Canal House', 'APARTMENT', NULL, 4.45, 'ACTIVE', 'Prinsengracht', 234, 'Amsterdam', '1016HJ', '0206123456', 'stay@canalhouse.nl', 10, 12, 160.00),
+(16, 'Fira Caldera Rooms', 'ROOM_RENTAL', 3, 4.15, 'ACTIVE', 'Danezi Street', 18, 'Fira', '84700', '2286083456', 'book@firacaldera.gr', 11, 10, 90.00),
+(17, 'Nafplio Old Town Hotel', 'HOTEL', 4, 4.55, 'ACTIVE', 'Staikopoulou', 22, 'Nafplio', '21100', '2752028901', 'info@nafpliooldtown.gr', 12, 22, 105.00),
+(18, 'Milan Central Suites', 'APARTMENT', NULL, 4.25, 'ACTIVE', 'Via Torino', 50, 'Milan', '20123', '0212345678', 'stay@milancecentral.it', 13, 18, 140.00);
+
+INSERT INTO accommodationAmenities(am_ACC_ID, am_NAME) VALUES
+(1, 'WIFI'), (1, 'BAR_RESTAURANT'), (1, 'AC'),
+(2, 'WIFI'), (2, 'AC'), (2, 'ACCESIBILITY'),
+(3, 'WIFI'), (3, 'BAR_RESTAURANT'), (3, 'AC'), (3, 'ACCESIBILITY'),
+(4, 'WIFI'), (4, 'AC'),
+(5, 'WIFI'), (5, 'BAR_RESTAURANT'), (5, 'AC'), (5, 'ACCESIBILITY'),
+(6, 'WIFI'), (6, 'AC'),
+(7, 'WIFI'), (7, 'BAR_RESTAURANT'), (7, 'AC'), (7, 'ACCESIBILITY'),
+(8, 'WIFI'), (8, 'AC'),
+(9, 'WIFI'), (9, 'BAR_RESTAURANT'),
+(10, 'WIFI'), (10, 'AC'),
+(11, 'WIFI'), (11, 'BAR_RESTAURANT'), (11, 'AC'),
+(12, 'WIFI'),
+(13, 'WIFI'), (13, 'BAR_RESTAURANT'), (13, 'AC'), (13, 'ACCESIBILITY'),
+(14, 'WIFI'), (14, 'BAR_RESTAURANT'), (14, 'AC'),
+(15, 'WIFI'), (15, 'AC'),
+(16, 'WIFI'), (16, 'AC'),
+(17, 'WIFI'), (17, 'BAR_RESTAURANT'), (17, 'AC'),
+(18, 'WIFI'), (18, 'AC'), (18, 'ACCESIBILITY');
+
+INSERT INTO dba (dba_username, start_date, end_date)
+VALUES ('root', CURDATE(), NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
