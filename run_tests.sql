@@ -5,9 +5,15 @@
 USE travel_agency_2025;
 
 -- Καθαρισμός προηγούμενων test data αν υπάρχουν
+SET FOREIGN_KEY_CHECKS = 0;
 DELETE FROM tripAccommodation WHERE ta_TR_ID IN (3,4,10);
 DELETE FROM trip_history WHERE id_taxidiou >= 100;
 DELETE FROM customer WHERE cust_email = 'test@test.com';
+DELETE FROM vehicle WHERE veh_plate = 'TEST-999';
+UPDATE trip SET tr_veh_id = NULL, tr_status = 'PLANNED', tr_veh_km_assign = NULL, tr_veh_km_return = NULL WHERE tr_id IN (1, 2, 6, 7);
+UPDATE vehicle SET veh_status = 'AVAILABLE' WHERE veh_id IN (1, 2, 3, 4, 5);
+UPDATE vehicle SET veh_total_km = 120000 WHERE veh_id = 4;
+SET FOREIGN_KEY_CHECKS = 1;
 
 SELECT '=====================================================' AS '';
 SELECT '=== STORED PROCEDURES TESTS ===' AS '';
