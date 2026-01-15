@@ -114,7 +114,8 @@ proc: BEGIN
        WHERE tr_id = p_tr_id;
 
        UPDATE vehicle
-       SET veh_total_km = p_current_km
+       SET veh_total_km = p_current_km,
+           veh_status = 'IN_USE'
        WHERE veh_id = p_veh_id;
 
 
