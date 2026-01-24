@@ -1,0 +1,178 @@
+-- ============================================================
+-- ΠΑΡΑΔΕΙΓΜΑΤΑ ΕΛΕΓΧΟΥ (TEST EXAMPLES)
+-- ============================================================
+
+-- ============================================================
+-- 1. ΕΛΕΓΧΟΣ ΑΔΕΙΑΣ ΟΔΗΓΗΣΗΣ (DRIVER LICENSE VALIDATION)
+-- ============================================================
+
+-- Παράδειγμα 1.1: Επιτυχία - Οδηγός με άδεια D για λεωφορείο 50 θέσεων
+-- Πρώτα εισάγουμε έναν οδηγό με άδεια D
+INSERT INTO worker (wrk_AT, wrk_name, wrk_lname, wrk_email, wrk_salary, wrk_br_code)
+VALUES ('DRV001', 'Γιώργος', 'Παπαδόπουλος', 'gpapad@email.com', 1500.00, 1);
+
+INSERT INTO driver (drv_AT, drv_license, drv_route, drv_experience)
+VALUES ('DRV001', 'D', 'ABROAD', 10);
+
+-- Ταξίδι με 50 θέσεις - θα πρέπει να επιτύχει γιατί ο οδηγός έχει άδεια D
+INSERT INTO trip (tr_departure, tr_return, tr_maxseats, tr_cost_adult, tr_cost_child, 
+                  tr_status, tr_min_participants, tr_br_code, tr_gui_AT, tr_drv_AT)
+VALUES ('2026-03-01 08:00:00', '2026-03-05 20:00:00', 50, 500.00, 300.00, 
+        'PLANNED', 20, 1, 'GUI001', 'DRV001');
+
+
+-- Παράδειγμα 1.2: Αποτυχία - Οδηγός με άδεια B για λεωφορείο 25 θέσεων
+-- Οδηγός με άδεια B (ακατάλληλη για λεωφορείο)
+INSERT INTO worker (wrk_AT, wrk_name, wrk_lname, wrk_email, wrk_salary, wrk_br_code)
+VALUES ('DRV002', 'Μαρία', 'Κωστοπούλου', 'mkost@email.com', 1200.00, 1);
+
+INSERT INTO driver (drv_AT, drv_license, drv_route, drv_experience)
+VALUES ('DRV002', 'B', 'LOCAL', 3);
+
+-- Ταξίδι με 25 θέσεις - πρέπει να αποτύχει γιατί απαιτείται άδεια C ή D
+-- (αν υπάρχει trigger που ελέγχει αυτό, θα εμφανίσει σφάλμα)
+INSERT INTO trip (tr_departure, tr_return, tr_maxseats, tr_cost_adult, tr_cost_child, 
+                  tr_status, tr_min_participants, tr_br_code, tr_gui_AT, tr_drv_AT)
+VALUES ('2026-04-01 08:00:00', '2026-04-03 20:00:00', 25, 200.00, 150.00, 
+        'PLANNED', 10, 1, 'GUI001', 'DRV002');
+
+
+-- ============================================================
+-- 2. ΧΡΟΝΙΚΗ ΕΠΙΚΑΛΥΨΗ ΟΧΗΜΑΤΟΣ (VEHICLE TIME OVERLAP)
+-- ============================================================
+
+-- Παράδειγμα 2.1: Επιτυχία - Δεν υπάρχει επικάλυψη
+-- Υπάρχει ήδη ταξίδι: 15/02 - 20/02 με οδηγό DRV001
+-- Νέο ταξίδι: 22/02 - 25/02 με τον ίδιο οδηγό - θα επιτύχει
+INSERT INTO trip (tr_departure, tr_return, tr_maxseats, tr_cost_adult, tr_cost_child, 
+                  tr_status, tr_min_participants, tr_br_code, tr_gui_AT, tr_drv_AT)
+VALUES ('2026-02-15 08:00:00', '2026-02-20 20:00:00', 40, 400.00, 250.00, 
+        'CONFIRMED', 15, 1, 'GUI001', 'DRV001');
+
+INSERT INTO trip (tr_departure, tr_return, tr_maxseats, tr_cost_adult, tr_cost_child, 
+                  tr_status, tr_min_participants, tr_br_code, tr_gui_AT, tr_drv_AT)
+VALUES ('2026-02-22 08:00:00', '2026-02-25 20:00:00', 40, 350.00, 200.00, 
+        'PLANNED', 15, 1, 'GUI001', 'DRV001');
+
+
+-- Παράδειγμα 2.2: Αποτυχία - Υπάρχει επικάλυψη
+-- Υπάρχει ήδη ταξίδι: 10/03 - 15/03 με οδηγό DRV001
+-- Νέο ταξίδι: 13/03 - 18/03 με τον ίδιο οδηγό - θα αποτύχει (επικάλυψη 13-15/03)
+INSERT INTO trip (tr_departure, tr_return, tr_maxseats, tr_cost_adult, tr_cost_child, 
+                  tr_status, tr_min_participants, tr_br_code, tr_gui_AT, tr_drv_AT)
+VALUES ('2026-03-10 08:00:00', '2026-03-15 20:00:00', 35, 450.00, 280.00, 
+        'CONFIRMED', 12, 1, 'GUI001', 'DRV001');
+
+-- Αυτό πρέπει να αποτύχει λόγω επικάλυψης
+INSERT INTO trip (tr_departure, tr_return, tr_maxseats, tr_cost_adult, tr_cost_child, 
+                  tr_status, tr_min_participants, tr_br_code, tr_gui_AT, tr_drv_AT)
+VALUES ('2026-03-13 08:00:00', '2026-03-18 20:00:00', 35, 400.00, 250.00, 
+        'PLANNED', 12, 1, 'GUI001', 'DRV001');
+
+
+-- ============================================================
+-- 3. ΚΡΑΤΗΣΗ ΚΑΤΑΛΥΜΑΤΟΣ ΑΝΑ ΠΡΟΟΡΙΣΜΟ (ACCOMMODATION BOOKING)
+-- ============================================================
+
+-- Παράδειγμα 3.1: Επιτυχία - Κράτηση σε πολλαπλούς προορισμούς
+-- Δημιουργία ταξιδιού με 20 θέσεις (χρειάζονται 10 δωμάτια)
+INSERT INTO trip (tr_departure, tr_return, tr_maxseats, tr_cost_adult, tr_cost_child, 
+                  tr_status, tr_min_participants, tr_br_code, tr_gui_AT, tr_drv_AT)
+VALUES ('2026-05-01 08:00:00', '2026-05-07 20:00:00', 20, 600.00, 400.00, 
+        'PLANNED', 10, 1, 'GUI001', 'DRV001');
+
+-- Υποθέτουμε ότι το trip έχει tr_id = 100 (θα αλλάξει ανάλογα με τη βάση)
+SET @new_trip_id = LAST_INSERT_ID();
+
+-- Προσθήκη προορισμών στο ταξίδι
+INSERT INTO travel_to (to_tr_id, to_dst_id, to_arrival, to_departure, to_sequence)
+VALUES (@new_trip_id, 1, '2026-05-01 14:00:00', '2026-05-04 10:00:00', 1);  -- Αθήνα, 3 νύχτες
+
+INSERT INTO travel_to (to_tr_id, to_dst_id, to_arrival, to_departure, to_sequence)
+VALUES (@new_trip_id, 2, '2026-05-04 16:00:00', '2026-05-06 10:00:00', 2);  -- Θεσσαλονίκη, 2 νύχτες
+
+-- Κλήση της stored procedure για κράτηση καταλυμάτων
+CALL procedureBookTripAccommodation(@new_trip_id);
+
+-- Τα ta_NIGHTS και ta_COST θα υπολογιστούν αυτόματα από το trigger
+
+
+-- Παράδειγμα 3.2: Αποτυχία - Δεν βρέθηκε κατάλυμα με αρκετά δωμάτια
+-- Δημιουργία ταξιδιού με 30 θέσεις (χρειάζονται 15 δωμάτια)
+INSERT INTO trip (tr_departure, tr_return, tr_maxseats, tr_cost_adult, tr_cost_child, 
+                  tr_status, tr_min_participants, tr_br_code, tr_gui_AT, tr_drv_AT)
+VALUES ('2026-06-01 08:00:00', '2026-06-05 20:00:00', 30, 700.00, 450.00, 
+        'PLANNED', 15, 1, 'GUI001', 'DRV001');
+
+SET @big_trip_id = LAST_INSERT_ID();
+
+-- Προσθήκη προορισμού με μικρό κατάλυμα (π.χ. μόνο 5 δωμάτια διαθέσιμα)
+INSERT INTO travel_to (to_tr_id, to_dst_id, to_arrival, to_departure, to_sequence)
+VALUES (@big_trip_id, 3, '2026-06-01 14:00:00', '2026-06-04 10:00:00', 1);  -- Ηράκλειο
+
+-- Αυτή η κλήση θα επιστρέψει ERROR και θα ακυρώσει τις κρατήσεις
+CALL procedureBookTripAccommodation(@big_trip_id);
+
+
+-- ============================================================
+-- ΕΛΕΓΧΟΣ ΑΠΟΤΕΛΕΣΜΑΤΩΝ
+-- ============================================================
+
+-- Έλεγχος κρατήσεων καταλυμάτων
+SELECT ta.*, a.acc_NAME 
+FROM tripAccommodation ta 
+JOIN accommodation a ON ta.ta_ACC_ID = a.acc_ID;
+
+-- Έλεγχος υπολογισμού κόστους από το trigger
+SELECT ta_TR_ID, ta_NIGHTS, ta_ROOMS, ta_COST 
+FROM tripAccommodation;
+
+-- Έλεγχος συνολικού κόστους ανά ταξίδι
+SELECT ta_TR_ID, SUM(ta_COST) AS total_accommodation_cost 
+FROM tripAccommodation 
+GROUP BY ta_TR_ID;
+
+
+-- ============================================================
+-- ΕΦΑΡΜΟΓΗ GUI (GRAPHICAL USER INTERFACE)
+-- ============================================================
+-- Η εφαρμογή GUI βρίσκεται στον φάκελο /gui και είναι υλοποιημένη
+-- σε JavaFX. Πρόκειται για έναν γενικό database browser που επιτρέπει
+-- την προβολή και διαχείριση όλων των πινάκων της βάσης δεδομένων.
+--
+-- ΔΟΜΗ ΑΡΧΕΙΩΝ:
+-- gui/
+-- ├── pom.xml                         -- Maven configuration (JavaFX 21, MySQL Connector)
+-- └── src/main/java/app/
+--     ├── MainApp.java                -- Entry point, δημιουργεί το παράθυρο 1200x700
+--     ├── Db.java                     -- Σύνδεση MySQL (localhost:3306/travel_agency_2025)
+--     └── TableBrowserView.java       -- Κύριο UI component (~450 γραμμές κώδικα)
+--
+-- ΤΕΧΝΙΚΕΣ ΛΕΠΤΟΜΕΡΕΙΕΣ:
+-- • Framework: JavaFX 21.0.4 με Maven
+-- • Database Driver: MySQL Connector/J 9.0.0
+-- • Java Version: 17+
+-- • UI Layout: BorderPane με SplitPane (70% TableView, 30% Form)
+--
+-- ΚΥΡΙΑ ΧΑΡΑΚΤΗΡΙΣΤΙΚΑ:
+-- • Αυτόματη ανίχνευση Primary Keys, Foreign Keys και ENUM πεδίων
+-- • Δυναμική δημιουργία φόρμας εισαγωγής/επεξεργασίας ανά πίνακα
+-- • CRUD λειτουργίες (Insert, Update, Delete) για κάθε πίνακα
+-- • Τα FK πεδία εμφανίζονται ως dropdowns με περιγραφικό κείμενο
+--   π.χ. "1 (Athens City Tour)" αντί για απλό "1"
+-- • Τα ENUM πεδία εμφανίζονται επίσης ως dropdowns
+-- • Τα AUTO_INCREMENT πεδία είναι μόνο για ανάγνωση στην εισαγωγή
+-- • Ειδικό φίλτρο χωρητικότητας για τον πίνακα vehicle
+--
+-- ΛΕΙΤΟΥΡΓΙΚΟΤΗΤΑ:
+-- 1. Επιλογή πίνακα από dropdown → αυτόματη φόρτωση δεδομένων
+-- 2. Click σε γραμμή → συμπλήρωση φόρμας με τα δεδομένα της
+-- 3. Insert: Συμπλήρωση φόρμας και πάτημα "Insert"
+-- 4. Update: Επιλογή γραμμής, τροποποίηση, πάτημα "Update"
+-- 5. Delete: Επιλογή γραμμής και πάτημα "Delete"
+--
+-- ΕΚΤΕΛΕΣΗ:
+-- cd gui && mvn clean javafx:run
+--
+-- ΣΗΜΕΙΩΣΗ: Η βάση δεδομένων πρέπει να τρέχει στο localhost:3306
+-- με username "root" και κενό password.
